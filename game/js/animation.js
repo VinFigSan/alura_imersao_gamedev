@@ -1,13 +1,16 @@
 class Animate{
-    constructor(matriz, sprite, xHtml, widthHtml, heightHtml, widthSprite, heightSprite){
+    constructor(matriz, sprite, xHtml, yVariation, widthHtml, heightHtml, widthSprite, heightSprite, velocity, delay){
         this.matriz = matriz
         this.sprite = sprite
         this.xHtml = xHtml
-        this.yHtml = height - this.heightHtml
+        this.yVariation = yVariation
+        this.yHtml = height - this.heightHtml - this.yVariation
         this.widthHtml = widthHtml
         this.heightHtml = heightHtml
         this.widthSprite = widthSprite
         this.heightSprite = heightSprite
+        this.velocity = velocity
+        this.delay = delay
         this.frameNow = 0
     }
 

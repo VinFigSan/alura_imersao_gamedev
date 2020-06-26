@@ -1,12 +1,21 @@
 let scenario
 let protagonist
 let slime
+let troll
+let flyingSlime
+let pontuation
+
 let imgScenario
 let imgProtagonist
-let imgEnemy
+let imgSlime
+let imgTroll
 let imgGameOver
+let imgFlyingSlime
+const foes=[]
+
 let soundtrack
 let jumpSound
+
 const matrizProtagonist = [
   [0,0],
   [220,0],
@@ -55,11 +64,62 @@ const matrizSlimeFoe = [
   [208, 626],
   [312, 626],
 ]
+const matrizTrollFoe = [
+  [0,0],
+  [400,0],
+  [800,0],
+  [1200,0],
+  [1600,0],
+  [0,400],
+  [400,400],
+  [800,400],
+  [1200, 400],
+  [1600, 400],
+  [0,800],
+  [400, 800],
+  [800, 800],
+  [1200, 800],
+  [1600, 800],
+  [0, 1200],
+  [400, 1200],
+  [800, 1200],
+  [1200, 1200],
+  [1600, 1200], 
+  [0, 1600],
+  [400, 1600],
+  [800, 1600],
+  [1200, 1600],
+  [1600, 1600],
+  [0, 2000],
+  [400, 2000],
+  [800, 2000],
+]
+const matrizFlyingSlimeFoe = [
+  [0,0],
+  [200, 0],
+  [400, 0],
+  [0, 150],
+  [200, 150],
+  [400, 150],
+  [0, 300],
+  [200, 300],
+  [400, 300],
+  [0, 450],
+  [200, 450],
+  [400, 450],
+  [0, 600],
+  [200, 600],
+  [400, 600],
+  [0, 750],
+]
 
 function preload() {
-  imgScenario = loadImage('style/img/scenario/forest.png')
-  imgProtagonist = loadImage('style/img/protagonist/hipsta.png')
-  imgEnemy = loadImage('style/img/foes/slime.png')
+  imgScenario = loadImage('img/scenario/forest.png')
+  imgProtagonist = loadImage('img/protagonist/hipsta.png')
+  imgSlime = loadImage('img/foes/slime.png')
+  imgTroll = loadImage('img/foes/troll.png')
+  imgFlyingSlime = loadImage('img/foes/flyingSlime.png')
+  imgGameOver = loadImage('img/assets/gameOver.png')
   soundtrack = loadSound('audio/soundtrack.mp3')
   jumpSound = loadSound('audio/jumpSound.mp3')
 }
@@ -68,26 +128,34 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30)
   scenario = new Scenario(imgScenario, 6)
-  protagonist = new Protagonist(matrizProtagonist, imgProtagonist, 0, 220, 270, 220, 270)
-  slime = new Slime(matrizSlimeFoe, imgEnemy, width - 104, 104, 104, 104, 104, 15)
+  protagonist = new Protagonist(matrizProtagonist, imgProtagonist, 0, 30, 220, 270, 220, 270)
+  const slime = new Foe(matrizSlimeFoe, imgSlime, width, 0, 104, 104, 104, 104, 15, 30)
+  const troll = new Foe(matrizTrollFoe, imgTroll, width + 700, 0, 400, 370, 400, 370, 19, 3000)
+  const flyingSlime = new Foe(matrizFlyingSlimeFoe, imgFlyingSlime, width + 500, 270, 200, 150, 200, 150, 24, 1000)
+  foes.push(slime, troll, flyingSlime)
+  pontuation = new Points()
   //soundtrack.loop()
 }
 
 function draw() {
   scenario.show()
   scenario.move()
+  pontuation.show()
+  pontuation.gainPoints()
   protagonist.show()
   protagonist.applyGravity()
-  slime.show()
-  slime.move()
-  if (protagonist.colliding(slime)){
-    noLoop()
-  }
+  foes.forEach(foe => {
+    foe.show()
+    foe.move()
+    if (protagonist.colliding(foe)){
+      image(imgGameOver, width/2 - 200, height/3 - 100)
+      noLoop()
+    }
+  })
 }
 
 function keyPressed() {
   if(key==='ArrowUp'){
-    protagonist.jump()
-    jumpSound.play()
+    protagonist.jump(jumpSound)
   }
 }
