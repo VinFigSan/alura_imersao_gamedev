@@ -10,11 +10,11 @@ class Protagonist extends Animate{
         this.jumps = 0
     }
 
-    jump(jumpSound){
+    jump(){
         if(this.jumps < 2){
-            jumpSound.play()
             this.velocityJump = this.jumpHeight
             this.jumps++
+            jumpSound.play()
         }
     }
 
@@ -29,8 +29,8 @@ class Protagonist extends Animate{
 
     colliding(inimigo){
         const precision = .63
-        /*rect(this.xHtml, this.yHtml, this.widthHtml * precision, this.heightHtml * precision)
-        rect(inimigo.xHtml, inimigo.yHtml, inimigo.widthHtml * precision, inimigo.heightHtml * precision)*/
+        //rect(this.xHtml, this.yHtml, this.widthHtml * precision, this.heightHtml * precision)
+        //rect(inimigo.xHtml, inimigo.yHtml, inimigo.widthHtml * precision, inimigo.heightHtml * precision)
         return collideRectRect(this.xHtml, this.yHtml, this.widthHtml * precision, this.heightHtml * precision, 
                         inimigo.xHtml, inimigo.yHtml, inimigo.widthHtml * precision, inimigo.heightHtml * precision)
     }
