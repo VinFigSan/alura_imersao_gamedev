@@ -1,0 +1,17 @@
+{"conf":{
+    "lifeMax": 10,
+    "lifeIni":7
+},"mapFoes" : [{
+    "foe": 0,
+    "velocity": 20
+},{
+    "foe": 1,
+    "velocity": 15
+},{
+    "foe": 0,
+    "velocity": 20
+},{
+    "foe": 2,
+    "velocity":40
+}]
+}

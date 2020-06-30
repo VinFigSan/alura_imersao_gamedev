@@ -8,6 +8,7 @@ class Protagonist extends Animate{
         this.velocityJump = 0
         this.jumpHeight = -45
         this.jumps = 0
+        this.invencible = false
     }
 
     jump(){
@@ -28,10 +29,20 @@ class Protagonist extends Animate{
     }
 
     colliding(inimigo){
-        const precision = .63
+        //const precision = .63
+        if(this.invencible){
+            return false
+        }
         //rect(this.xHtml, this.yHtml, this.widthHtml * precision, this.heightHtml * precision)
         //rect(inimigo.xHtml, inimigo.yHtml, inimigo.widthHtml * precision, inimigo.heightHtml * precision)
-        return collideRectRect(this.xHtml, this.yHtml, this.widthHtml * precision, this.heightHtml * precision, 
-                        inimigo.xHtml, inimigo.yHtml, inimigo.widthHtml * precision, inimigo.heightHtml * precision)
+        return collideRectRect(this.xHtml, this.yHtml, this.widthHtml, this.heightHtml, 
+                        inimigo.xHtml, inimigo.yHtml, inimigo.widthHtml, inimigo.heightHtml)
+    }
+
+    invencibility(){
+        this.invencible = true
+        setTimeout(() => {
+            this.invencible = false
+        }, 2000);
     }
 }

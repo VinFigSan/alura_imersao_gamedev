@@ -9,5 +9,7 @@ function preload() {
     soundtrack = loadSound('audio/soundtrack.mp3')
     jumpSound = loadSound('audio/jumpSound.mp3')
     fontStartScreen = loadFont('img/assets/fontStartScreen.otf')
+    imgHearth = loadImage('img/assets/hearth.png')
+    cartridge = loadJSON('cartridge/cartridge.json')
   }
   

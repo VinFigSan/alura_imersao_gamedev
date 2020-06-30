@@ -4,6 +4,8 @@ let slime
 let troll
 let flyingSlime
 let pontuation
+let life
+let cartridge
 const allFoes=[]
 
 let managerScene
@@ -20,6 +22,7 @@ let imgGameOver
 let imgFlyingSlime
 let imgBgStartScreen
 let fontStartScreen
+let imgHearth
 
 let soundtrack
 let jumpSound
